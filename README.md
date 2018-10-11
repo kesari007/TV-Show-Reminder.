@@ -1,5 +1,5 @@
 ## TV-Show-Reminder
-A Python script asks multiple users for their email address and their favourite TV show,Stores them into the MySql Database table,fetches the status of TV shows from websites such as [Imdb](https://www.imdb.com) and [Next Episode](https:www.next-episode.net) and sends a single Email to each user consisting of their TV favourite shows'  and their AIR status.
+A Python script asks multiple users for their email address and their favourite TV show,Stores them into the MySql Database table,fetches the status of TV shows from websites such as [Imdb](https://www.imdb.com) and [Next Episode](https://www.next-episode.net) and sends a single Email to each user consisting of their TV favourite shows and their AIR status.
 ## Dependencies :
 ```
 Python-3.6.5
