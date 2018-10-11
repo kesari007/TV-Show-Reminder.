@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Oct  7 15:19:14 2018
 
-@author: Pranchal
-"""
 # Importing libraries 
 import requests
 from bs4 import BeautifulSoup
@@ -31,7 +26,6 @@ my_cursor.execute("USE testdb")
 
 
 def main():
-    
     # creating first table containing email and show names 
     my_cursor.execute("CREATE TABLE users2 ( email TEXT , TVshow TEXT)")
     #  creating second table containing showname and their status 
@@ -88,8 +82,8 @@ def SendMail(email,content):
     mail.close()
 
 
+# funcction for fetching tv show status 
 def FetchStatus(name):
-    
     status_list = ["Running","Upcoming Season Premiere","Canceled/Ended","Returning Series"]
     day_list = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
 
@@ -141,6 +135,7 @@ def getHTML(glink):
     page = requests.get(glink)
     return BeautifulSoup(page.content,'html.parser')
 
+# Function for getting Imdb link of the show
 def GetLink(name,season):
     html = getHTML('https://www.google.co.in/search?q='+ name)
     for cite in html.findAll('cite'):
@@ -174,25 +169,3 @@ def FetchYear(soup):
         return "The show has finished streaming all it's episodes. "
 
 main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
