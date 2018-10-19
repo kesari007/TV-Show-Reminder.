@@ -16,7 +16,7 @@ Enter the number of entries : 3
 Email address: abc@gmail.com
 TV Series: gotham,game of thrones,sherlock,suits
 Email address: mus@gmail.com
-TV Series: pitchers,the vampire diaries,sherlock
+TV Series: pitchers,suits,sherlock
 Email address: xyz@gmail.com
 TV Series: breaking bad,gotham,the flash
 ```
@@ -35,21 +35,23 @@ Status : The show has finished streaming all it's episodes.
 TV Series name : suits
 Status : The show has finished streaming all it's episodes. 
 ```
-## Table Schema :
+## Table Schema Example :
 Table name-users2
 
-|email|TVshow|
+|Email|TVshow|
 |-----|------|
 |abc@gmail.com|gotham,game of thrones,sherlock,suits|
+|mus@gmail.com|pitchers,suits,sherlock|
 
 
-Table name - showstats1
+Table name - showstats1 (The table contains status of all Unique shows)
 
-|ShowName|status|
+|ShowName|Status|
 |--------|------|
 |gotham|The next episode airs on 2018-05-17|
 |game of thrones|The next season begins in 2019|
 |sherlock|The show has finished streaming all it's episodes|
 |suits|The show has finished streaming all it's episodes|
+|pitchers|The show has finished streaming all it's episodes|
 
 
