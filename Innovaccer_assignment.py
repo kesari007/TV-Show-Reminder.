@@ -1,5 +1,6 @@
 
-# Importing libraries 
+# -----------------------Importing libraries------------------------------------#
+
 import requests
 from bs4 import BeautifulSoup
 import re 
@@ -14,7 +15,8 @@ Email_show_map = {}
 shows_set = set()
 status_dc = {}
 
-# Establishing connection with database
+#---------------------- Establishing connection with database---------------------#
+
 mydb = mysql.connector.connect(
 	host = "localhost",
 	user = "root",
@@ -24,6 +26,7 @@ my_cursor = mydb.cursor()
 my_cursor.execute("CREATE DATABASE testdb")
 my_cursor.execute("USE testdb")
 
+#---------------------------Main Function------------------------------------------#
 
 def main():
     # creating first table containing email and show names 
@@ -71,7 +74,8 @@ def main():
             msg = msg + temp
         SendMail(_row[0],msg)
     
-   
+#-------------------Function for sending Email to users------------------------------------#
+
 def SendMail(email,content):
     msg = MIMEText(content)
     mail= smtplib.SMTP('smtp.gmail.com',587)
@@ -82,7 +86,8 @@ def SendMail(email,content):
     mail.close()
 
 
-# funcction for fetching tv show status 
+#--------------------Function for fetching Show status from Imdb or Next-Episode------------#
+
 def FetchStatus(name):
     status_list = ["Running","Upcoming Season Premiere","Canceled/Ended","Returning Series"]
     day_list = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
@@ -130,19 +135,22 @@ def FetchStatus(name):
                         return air_year
 
 
-# function for getting the Beautiful soup object
+#--------------------------Function for getting the Beautiful soup object------------------------#
+
 def getHTML(glink):
     page = requests.get(glink)
     return BeautifulSoup(page.content,'html.parser')
 
-# Function for getting Imdb link of the show
+#--------------------------Function for getting Imdb link of the show----------------------------#
+
 def GetLink(name,season):
     html = getHTML('https://www.google.co.in/search?q='+ name)
     for cite in html.findAll('cite'):
         if 'imdb.com/title/tt' in cite.text :
             html = getHTML(cite.text + 'episodes?season=' + season)
             return html
-        
+#-----------------------Function for cleaning date and converting in the required format---------#
+
 def clean_date(date):
     date_map ={"Jan":'1',"Feb":'2',"Mar":'3',
                "Apr":'4',"May":'5',"Jun":'6',
@@ -158,7 +166,8 @@ def clean_date(date):
     new_str = "-".join(date)
     return new_str
 
-# Function for fetching the air year for returning series
+#-----------------------Function for fetching the air year for returning series-------------------#
+
 def FetchYear(soup):
     x=soup.findAll(class_="airdate")
     clean_x = x[0].text.strip()
@@ -167,5 +176,6 @@ def FetchYear(soup):
         return clean_x
     else :
         return "The show has finished streaming all it's episodes. "
-
-main()
+        
+if __name__ == '__main__':
+    main()
